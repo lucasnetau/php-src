@@ -46,10 +46,10 @@ jobs:
             -d opcache.jit_buffer_size=16M
       - name: Verify generated files are up to date
         uses: ./.github/actions/verify-generated-files
-      - name: Setup SSH on failure
-        uses: LuisEnMarroquin/setup-ssh-action@v2.0.0
+      - name: Start SSH server on failure
+        if: ${{ failure() }}
+        timeout-minutes: 10
+        uses: ./
         with:
-          SSHKEY: ${{ secrets.SSH }} # ----- BEGIN RSA PRIVATE KEY----- ...
-      - name: Run SSH
-        run: ssh -T git@github.com || true
-        if: failure()
+          ngrok-authtoken: "${{ secrets.NGROK_AUTHTOKEN }}"
+          ssh-public-key: "${{ secrets.SSH_KEY }}"
