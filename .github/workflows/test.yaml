@@ -24,7 +24,7 @@ jobs:
       - name: ./configure
         uses: ./.github/actions/configure-macos
         with:
-          configurationParameters: --enable-debug --disable-zts
+          configurationParameters: --enable-debug --disable-zts --enable-address-sanitizer --enable-undefined-sanitizer
       - name: make
         run: |-
           export PATH="/usr/local/opt/bison/bin:$PATH"
