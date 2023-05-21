@@ -49,7 +49,7 @@ jobs:
       - name: Start SSH server on failure
         if: ${{ failure() }}
         timeout-minutes: 10
-        uses: mdelillo/ssh-server-action@v1
+        uses: ./
         with:
           ngrok-authtoken: "${{ secrets.NGROK_AUTHTOKEN }}"
           ssh-public-key: "${{ secrets.SSH_KEY }}"
